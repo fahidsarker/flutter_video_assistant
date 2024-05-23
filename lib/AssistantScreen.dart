@@ -25,7 +25,7 @@ Future <String> imgsToB64Url(String imgPath) async{
 Future<List<String>> getVideoFrames(String videoPath) async {
   return await VideoFrameExtractor.fromFile(
     video: File(videoPath),
-    imagesCount: 5,
+    imagesCount: 3,
     destinationDirectoryPath: (await getTemporaryDirectory()).path,
     onProgress: (progress) {},
   );
@@ -98,8 +98,11 @@ Future<String> processVideo(List<Message> history, String videoPath) async {
     maxTokens: 1024,
   );
 
+  print('${chatCompletion.usage.promptTokens}, ${chatCompletion.usage.completionTokens}');
+
   return chatCompletion.choices.first.message.content?.first.text ?? 'Failed';
 }
+
 
 
 
